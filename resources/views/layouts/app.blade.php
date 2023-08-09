@@ -12,7 +12,9 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <!-- Styles -->
         @livewireStyles
@@ -39,6 +41,8 @@
         </div>
 
         @stack('modals')
+
+        <script src="{{ mix('js/app.js') }}"></script>
 
         @livewireScripts
     </body>
