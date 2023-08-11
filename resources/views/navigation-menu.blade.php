@@ -39,7 +39,8 @@
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                @auth
+                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
                         <x-dropdown align="right" width="60">
                             <x-slot name="trigger">
@@ -86,10 +87,12 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-                @endif
+                    @endif
+                @endauth
 
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
+                    @auth
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <div class="flex items-center px-4">
@@ -139,6 +142,17 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700">
+                            {{ __('Log in') }}
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700">
+                                {{ __('Register') }}
+                            </a>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -165,6 +179,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -233,5 +248,16 @@
                 @endif
             </div>
         </div>
+        @else
+        <div class="py-1 border-t border-gray-200">
+            <x-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                {{ __('Log in') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                {{ __('Register') }}
+            </x-responsive-nav-link>
+        </div>
+        @endauth
     </div>
 </nav>
