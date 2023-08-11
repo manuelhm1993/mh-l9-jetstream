@@ -1,3 +1,19 @@
+@php
+    // ---------------- Esto podría definirse ser enviado desde un controlador
+    $nav_links = [
+        [
+            'name'   => 'Dashboard',
+            'route'  => route('dashboard'),
+            'active' => request()->routeIs('dashboard')
+        ],
+        [
+            'name'   => 'Welcome',
+            'route'  => route('welcome'),
+            'active' => request()->routeIs('welcome')
+        ],
+    ];
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,9 +28,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    @foreach ($nav_links as $nav_link)
+                    {{-- Si la url coincide con la ruta nombrada se le agrega la clase active --}}
+                    <x-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+                        {{ __($nav_link['name']) }}
                     </x-nav-link>
+                    @endforeach
                 </div>
             </div>
 
@@ -138,9 +157,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            @foreach ($nav_links as $nav_link)
+            <x-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+                {{ __($nav_link['name']) }}
             </x-responsive-nav-link>
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->
