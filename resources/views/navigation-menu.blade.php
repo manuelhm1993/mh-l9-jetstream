@@ -2,14 +2,9 @@
     // ---------------- Esto podría definirse ser enviado desde un controlador
     $nav_links = [
         [
-            'name'   => 'Dashboard',
-            'route'  => route('dashboard'),
-            'active' => request()->routeIs('dashboard')
-        ],
-        [
-            'name'   => 'Servicios',
-            'route'  => '#',
-            'active' => false
+            'name'   => 'Home',
+            'route'  => route('home'),
+            'active' => request()->routeIs('home')
         ],
     ];
 @endphp
