@@ -19,7 +19,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased bg-light">
-        <x-jet-banner />
+        <x-banner />
         @livewire('navigation-menu')
 
         <!-- Page Heading -->
