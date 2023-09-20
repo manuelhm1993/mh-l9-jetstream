@@ -259,8 +259,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
-    // 'profile_url' => 'user/profile',
+    'profile_url' => 'user/profile', // Cuando no es false, habilita el botón del perfil del user menú
 
     /*
     |--------------------------------------------------------------------------
@@ -321,9 +320,9 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text'  => 'profile',
+            'route' => 'profile.show',
+            'icon'  => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
